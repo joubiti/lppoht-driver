@@ -9,14 +9,12 @@ The library provides a C API for interfacing with the LPPHOT03 photometric probe
 
 ### Integration
 
-1. **Include the Header:**
-   Include the library header files in your application source code.
+1. Include the library header files in your application source code.
    ```c
    #include "lpph.h"
    ```
 
-2. **Implement UART Functions:**
-   Implement the UART write and read functions along with RS485 enable/disable functions required by `photometric_probe_obj`.
+2. Implement the UART write and read functions along with RS485 enable/disable functions required by `photometric_probe_obj`. Below is an example for an STM32 microcontroller using ST's HAL.
    ```c
    void uart_write(const uint8_t* buf, uint8_t len) {
        HAL_UART_Transmit(&huart1, (uint8_t*)buf, len, HAL_MAX_DELAY);
@@ -35,8 +33,7 @@ The library provides a C API for interfacing with the LPPHOT03 photometric probe
    }
    ```
 
-3. **Initialize Probe:**
-   Create an instance of `photometric_probe_obj` and initialize it.
+3. Create an instance of `photometric_probe_obj` and initialize it.
    ```c
    photometric_probe_obj probe;
    config_t cfg = {
@@ -53,13 +50,12 @@ The library provides a C API for interfacing with the LPPHOT03 photometric probe
 
    photometric_probe_init(&probe, cfg);
    ```
-   Note: To configure the probe with specific configuration parameters (for the first time), use factory initialization API instead, and recycle the device afterwards, then use normal initialization API
+   **Note: To configure the probe with specific configuration parameters (for the first time), use factory initialization API instead, and recycle the device afterwards, then use normal initialization API**
    ```c
    photometric_probe_factory_init(&probe, cfg);
    ```
 
-5. **Read Measurements:**
-   Use the API to read temperature and illuminance values.
+5. Use the API to read temperature and illuminance values.
    ```c
    float temp_celsius = photometric_probe_read_internal_temperature_celsius(&probe);
    uint32_t lux = photometric_probe_read_illuminance(&probe);
