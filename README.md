@@ -1,5 +1,3 @@
-# lppoht-driver
-
 # LPPHOT03 Photometric Probe Library
 
 ## Overview
