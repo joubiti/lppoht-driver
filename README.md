@@ -1,13 +1,8 @@
 # LPPHOT03 Photometric Probe Library
 
-## Overview
-
 The library provides a C API for interfacing with the LPPHOT03 photometric probe. It allows users to configure and read data from the photometric probe via UART, manage different operational modes, and retrieve various measurements such as internal temperature and illuminance. The driver is portable to any architecture and embedded platform, through the use of function pointers to define hardware dependent interfaces (UART, RS485 HW control).
 
-
-## Usage
-
-### Integration
+## How to use the library
 
 1. Include the library header files in your application source code.
    ```c
