@@ -61,27 +61,39 @@ probe_status_e photometric_probe_factory_init(photometric_probe_obj* obj, config
     // configuring device address
     char bdrate_cfg[10];
     sprintf(bdrate_cfg, "CMA%03d", cfg.address);
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) bdrate_cfg, strlen(bdrate_cfg));
+    obj->disable_transmission();
     // configuring device baudrate
     char param_cfg[8];
     sprintf(param_cfg, "CMB%d", cfg.baudrate);
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) param_cfg, strlen(param_cfg));
+    obj->disable_transmission();
     // configuring UART transmission mode
     sprintf(param_cfg, "CMP%d", cfg.mode);
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) param_cfg, strlen(param_cfg));
+    obj->disable_transmission();
     // verify parameters
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) "RMA", 3);
+    obj->disable_transmission();
     uint8_t rsp;
     obj->uart_read(&rsp, 1);
     if(rsp != cfg.address){
         return STATUS_ERR;
     }
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) "RMB", 3);
+    obj->disable_transmission();
     obj->uart_read(&rsp, 1);
     if(rsp != cfg.baudrate){
         return STATUS_ERR;
     }
+    obj->enable_transmission();
     obj->uart_write((const uint8_t*) "RMP", 3);
+    obj->disable_transmission();
     obj->uart_read(&rsp, 1);
     if(rsp != cfg.mode){
         return STATUS_ERR;
