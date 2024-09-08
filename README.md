@@ -38,10 +38,10 @@ The library provides a C API for interfacing with the LPPHOT03 photometric probe
        .range = LOW_RANGE
    };
 
-   probe.uart_write = uart_write;
-   probe.uart_read = uart_read;
-   probe.enable_transmission = enable_transmission;
-   probe.disable_transmission = disable_transmission;
+   probe.uart_write = &uart_write;
+   probe.uart_read = &uart_read;
+   probe.enable_transmission = &enable_transmission;
+   probe.disable_transmission = &disable_transmission;
 
    photometric_probe_init(&probe, cfg);
    ```
